@@ -1,0 +1,19 @@
+name: windows
+on: [push, pull_request]
+jobs:
+  runMultipleCommands:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.0.3
+        uses: seanmiddleditch/gha-setup-vsdevenv@master
+      - name: Generate VS Project
+        run: |
+          win\premake5.exe vs2019 --jsx --storage
+      - name: Compile
+        run: |
+          devenv .build\vs2019\quickjs.sln /Build
+
+
