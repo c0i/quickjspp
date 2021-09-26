@@ -16,5 +16,8 @@ jobs:
       - name: Compile
         run: |
           devenv .build\vs2019\quickjs.sln /Build
+      - name: Test
+        run: |
+          win\test.bat
 
 
